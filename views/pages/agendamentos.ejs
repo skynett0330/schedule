@@ -1,0 +1,161 @@
+<%- include('../partials/head.ejs')%>
+    <!-- 
+  <------navbar-------->
+
+    <body class="hold-transition sidebar-mini layout-fixed ">
+        <%- include('../partials/navbar.ejs')%>
+            <div class="wrapper">
+                <div class="content-wrapper">
+
+
+                    <div class="content-header">
+                        <div class="container-fluid">
+
+                            <div class="col-sm-12">
+                                <div class="row">
+
+
+                                    <%- include("../partials/aside.ejs") %>
+
+
+                                        <div class="card w-100 ">
+                                            <div class="card-header "style="background-color:rgb(214, 235, 216">
+                                               
+                                                <% if(typeof errors !='undefined' ) {%>
+
+                                                    <% errors.forEach(error=>{ %>
+
+                                                        <div class="alert alert-danger alert-sm ">
+                                                            <li>
+                                                                <%= error.message %>
+                                                            </li>
+                                                        </div>
+
+                                                        <%})%>
+                                                            <%}%>
+
+                                                                <%if(messages.success_msg) {%>
+                                                                    <div class="alert alert-success float-right">
+                                                                        <%= messages.success_msg%>
+                                                                    </div>
+                                                                    <%}%>
+                                                                        <h5>Agendamentos</h5>
+                                            </div>
+                                            <div class="card-body">
+                                                <div class="row col-12">
+                                                    <div class="col-4">
+                                                        <form method="post" action="/contatos/inserir">
+                                                            Nome:
+                                                            <input class="form-control form-control-sm" name="nome"
+                                                                required>
+                                                            Entidade/Orgão
+                                                            <input class="form-control form-control-sm" name="entidade"
+                                                                required>
+                                                            Cargo/função
+                                                            <input class="form-control form-control-sm" name="cargo"
+                                                                required>
+
+                                                    </div>
+                                                    <div class="col-4">
+                                                        Endereço
+                                                        <input class="form-control form-control-sm" name="endereco"
+                                                            required>
+                                                        Telefone:
+                                                        <input class="form-control form-control-sm" name="telefone"
+                                                            required>
+                                                        Email:
+                                                        <input class="form-control form-control-sm" name="email"
+                                                            required>
+                                                    </div>
+                                                    <div class="col-4">
+                                                        data:
+                                                        <input type="date" class="form-control form-control-sm"
+                                                            name="data" required>
+                                                        hora inicial
+                                                        <input class="form-control form-control-sm" type="time" name="horaIn">
+                                                        hora final
+                                                        <input class="form-control form-control-sm" type="time" name="horaEnd">
+
+
+
+                                                    </div>
+
+                                                    <div class="md-form col-12">
+                                                        <div class="form-group">
+                                                            <label for="form10">Observações</label>
+                                                            <i class="fas fa-pencil-alt prefix"></i>
+                                                            <textarea id="form10" class="sm-textarea form-control"
+                                                                name="obs" required rows="1"></textarea>
+
+                                                        </div>
+
+                                                        <button
+                                                            class="btn btn-success btn-sm float-right">Adicionar</button>
+                                                        </form>
+                                                    </div>
+
+                                                </div>
+                                            </div>
+
+                                            <div class="card-footer">
+                                                <div class="table-responsive">
+                                                    <table class="table table-sm ">
+
+                                                        <thead class="alert-gray" style="background-color:rgb(214, 235, 216)">
+                                                            <tr>
+                                                                <th hidden>Id</th>
+                                                                <th>Nome</th>
+                                                                <th>Entidade</th>
+                                                                <th>data</th>
+                                                                <th>Hora ini</th>
+                                                                <th>Hora fim</th>
+
+                                                                <th>Ação</th>
+                                                                <th></th>
+                                                            </tr>
+                                                        </thead>
+                                                        <% dados.forEach(dado=>{ %>
+                                                            <tbody>
+                                                                <tr>
+                                                                    <td hidden>
+                                                                        <%= dado.id_contato%>
+                                                                    </td>
+                                                                    <td>
+                                                                        <%= dado.nome %>
+                                                                    </td>
+                                                                    <td>
+                                                                        <%= dado.entidade %>
+                                                                    </td>
+                                                                    <td>
+                                                                        <%= dado.data %>
+                                                                    </td>
+                                                                    <td><%= dado.horain%></td>
+                                                                    <td><%= dado.horaend%></td>
+
+
+                                                                    <td><a class="fa fa-eye"
+                                                                            href="/contatos/getId/<%= dado.id_contato%>"
+                                                                            data-toggle=" modal"
+                                                                            data-target="#editModal">
+                                                                        </td>  
+                                                                     <td>     <a
+                                                                                href="/contatos/delete/<%= dado.id_contato%>"
+                                                                                class="fa fa-trash text-danger"
+                                                                                onclick="return confirm('deseja deletar o Item <%= dado.id_contato%>?')"></a>
+                                                                    </td>
+                                                                    <%})%>
+                                                                </tr>
+                                                            </tbody>
+                                                    </table>
+                                                </div>
+                                            </div>
+                                        </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+           
+            <%- include('../partials/cdn.ejs')%>
+    </body>
