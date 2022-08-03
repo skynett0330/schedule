@@ -50,7 +50,7 @@ app.use(flash());
 app.use('/',loginRouter)
 app.use('/users',isAuthenticated,loginRouter)
 app.use("/contatos",isAuthenticated, contatoRouter)
-app.use("/userRouter",isAuthenticated,userRouter)
+app.use("/userRouter",userRouter)
 
 
 app.listen(PORT, function (req, res) {
